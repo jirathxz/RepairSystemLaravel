@@ -65,27 +65,17 @@ export default function ProductShow({ product, relatedProducts }: Props) {
 
             <div className="flex flex-1 flex-col gap-6 p-4 md:p-6 max-w-6xl w-full mx-auto">
                 {/* Product Hero Card */}
-                <Card className="border-border bg-card overflow-hidden">
+                <Card className="bg-card overflow-hidden">
                     <CardContent className="p-6 md:p-8">
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                             {/* Product Image Column */}
                             <div className="lg:col-span-5 flex flex-col items-center">
-                                <div className="relative w-full aspect-square rounded-xl overflow-hidden bg-muted/30 border border-border shadow-inner group">
-                                    {product.image_url ? (
-                                        <img
-                                            src={product.image_url}
-                                            alt={product.name}
-                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                        />
-                                    ) : (
-                                        <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-                                            {isHardware ? (
-                                                <Monitor className="size-20" />
-                                            ) : (
-                                                <Laptop className="size-20" />
-                                            )}
-                                        </div>
-                                    )}
+                                <div className="relative w-full aspect-square rounded-xl overflow-hidden bg-secondary/20 flex items-center justify-center p-6 group">
+                                    <img
+                                        src={product.image_url!}
+                                        alt={product.name}
+                                        className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500"
+                                    />
 
                                     <div className="absolute top-3 left-3 flex gap-1.5">
                                         <Badge variant={isHardware ? 'default' : 'secondary'} className="font-bold">
@@ -107,7 +97,7 @@ export default function ProductShow({ product, relatedProducts }: Props) {
                                         </span>
                                         <div>
                                             {inStock ? (
-                                                <Badge variant="outline" className="border-emerald-500/40 text-emerald-500 bg-emerald-500/10 gap-1">
+                                                <Badge variant="secondary" className="text-emerald-400 bg-emerald-500/15 gap-1">
                                                     <CheckCircle2 className="size-3.5" /> มีสินค้าในสต็อก ({product.stock} ชิ้น)
                                                 </Badge>
                                             ) : (
@@ -123,10 +113,10 @@ export default function ProductShow({ product, relatedProducts }: Props) {
                                     </h1>
 
                                     {/* Price Card */}
-                                    <div className="p-4 rounded-xl bg-muted/40 border border-border mb-5 flex items-baseline justify-between">
+                                    <div className="p-4 rounded-xl bg-secondary/50 mb-5 flex items-baseline justify-between">
                                         <div>
                                             <span className="text-xs text-muted-foreground block mb-0.5">
-                                                ราคาพิเศษ (รวมภาษีมูลค่าเพิ่มแล้ว)
+                                                ราคาพิเศษ รวมภาษีมูลค่าเพิ่มแล้ว
                                             </span>
                                             <span className="text-3xl md:text-4xl font-black text-primary tracking-tight">
                                                 {formatPrice(product.price)}
@@ -144,14 +134,14 @@ export default function ProductShow({ product, relatedProducts }: Props) {
                                     )}
                                 </div>
 
-                                <Separator />
+                                <Separator className="bg-secondary" />
 
                                 {/* Quantity & Actions */}
                                 <div className="space-y-4">
                                     {inStock && (
                                         <div className="flex items-center gap-3">
                                             <span className="text-xs font-semibold text-muted-foreground">จำนวน:</span>
-                                            <div className="flex items-center bg-muted/60 border border-border rounded-lg p-0.5">
+                                            <div className="flex items-center bg-secondary rounded-lg p-0.5">
                                                 <Button
                                                     variant="ghost"
                                                     size="icon"
@@ -181,7 +171,7 @@ export default function ProductShow({ product, relatedProducts }: Props) {
                                         <Button
                                             onClick={() => handleAddToCart(false)}
                                             disabled={!inStock || isAdding}
-                                            variant="outline"
+                                            variant="secondary"
                                             className="h-11 font-bold gap-2 text-sm"
                                         >
                                             <ShoppingCart className="size-4" />
@@ -190,26 +180,26 @@ export default function ProductShow({ product, relatedProducts }: Props) {
                                         <Button
                                             onClick={() => handleAddToCart(true)}
                                             disabled={!inStock || isAdding}
-                                            className="h-11 font-bold text-sm bg-primary text-primary-foreground shadow-md hover:bg-primary/90"
+                                            className="h-11 font-bold text-sm bg-primary text-primary-foreground hover:bg-primary/90"
                                         >
-                                            สั่งซื้อทันที (Buy Now)
+                                            สั่งซื้อทันที
                                         </Button>
                                     </div>
 
                                     {/* Assurance Row */}
                                     <div className="grid grid-cols-3 gap-2.5 pt-2 text-center">
-                                        <div className="p-3 rounded-lg bg-muted/30 border border-border">
+                                        <div className="p-3 rounded-lg bg-secondary/40">
                                             <Truck className="size-4 text-primary mx-auto mb-1" />
                                             <div className="text-[11px] font-semibold">ส่งด่วนทั่วไทย</div>
                                             <div className="text-[10px] text-muted-foreground">1-2 วันทำการ</div>
                                         </div>
-                                        <div className="p-3 rounded-lg bg-muted/30 border border-border">
-                                            <ShieldCheck className="size-4 text-emerald-500 mx-auto mb-1" />
+                                        <div className="p-3 rounded-lg bg-secondary/40">
+                                            <ShieldCheck className="size-4 text-emerald-400 mx-auto mb-1" />
                                             <div className="text-[11px] font-semibold">ประกันศูนย์แท้</div>
                                             <div className="text-[10px] text-muted-foreground">เคลมศูนย์สบายใจ</div>
                                         </div>
-                                        <div className="p-3 rounded-lg bg-muted/30 border border-border">
-                                            <RotateCcw className="size-4 text-indigo-500 mx-auto mb-1" />
+                                        <div className="p-3 rounded-lg bg-secondary/40">
+                                            <RotateCcw className="size-4 text-primary mx-auto mb-1" />
                                             <div className="text-[11px] font-semibold">เปลี่ยนคืนได้</div>
                                             <div className="text-[10px] text-muted-foreground">ภายใน 7 วัน</div>
                                         </div>
@@ -222,19 +212,19 @@ export default function ProductShow({ product, relatedProducts }: Props) {
 
                 {/* Technical Specifications */}
                 {product.specs && Object.keys(product.specs).length > 0 && (
-                    <Card className="border-border bg-card">
+                    <Card className="bg-card">
                         <CardContent className="p-6">
                             <h2 className="text-base font-bold text-foreground mb-4 flex items-center gap-2">
                                 <Sparkles className="size-4 text-primary" />
-                                ข้อมูลจำเพาะทางเทคนิค (Specifications)
+                                ข้อมูลจำเพาะทางเทคนิค
                             </h2>
 
-                            <div className="divide-y divide-border border border-border rounded-lg overflow-hidden bg-muted/10">
+                            <div className="rounded-lg overflow-hidden bg-secondary/30">
                                 {Object.entries(product.specs).map(([key, value], idx) => (
                                     <div
                                         key={key}
                                         className={`grid grid-cols-1 sm:grid-cols-3 p-3 text-xs sm:text-sm ${
-                                            idx % 2 === 0 ? 'bg-muted/20' : 'bg-transparent'
+                                            idx % 2 === 0 ? 'bg-secondary/40' : 'bg-transparent'
                                         }`}
                                     >
                                         <span className="font-semibold text-muted-foreground">{key}</span>
@@ -263,14 +253,14 @@ export default function ProductShow({ product, relatedProducts }: Props) {
                                     href={`/products/${rel.slug}`}
                                     className="group block"
                                 >
-                                    <Card className="h-full border-border bg-card hover:border-primary/50 transition-all">
+                                    <Card className="h-full bg-card hover:bg-secondary/60 transition-all">
                                         <CardContent className="p-4 flex flex-col justify-between h-full">
                                             <div>
-                                                <div className="aspect-square rounded-lg overflow-hidden bg-muted/40 mb-3 border border-border">
+                                                <div className="aspect-square rounded-lg overflow-hidden bg-secondary/20 mb-3 flex items-center justify-center p-2">
                                                     <img
                                                         src={rel.image_url || ''}
                                                         alt={rel.name}
-                                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                                                        className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform"
                                                     />
                                                 </div>
                                                 <div className="text-[11px] text-muted-foreground mb-1">{rel.brand}</div>
@@ -296,7 +286,7 @@ export default function ProductShow({ product, relatedProducts }: Props) {
 ProductShow.layout = (props: Props) => ({
     breadcrumbs: [
         {
-            title: 'ร้านค้า (Shop)',
+            title: 'ร้านค้า',
             href: '/shop',
         },
         {

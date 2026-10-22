@@ -10,7 +10,6 @@ import {
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
-import { NavUser } from '@/components/nav-user';
 import {
     Sidebar,
     SidebarContent,
@@ -40,23 +39,23 @@ export function AppSidebar() {
 
     const storeNavItems: NavItem[] = [
         {
-            title: 'ร้านค้า (Shop)',
+            title: 'ร้านค้า',
             href: '/shop',
             icon: Store,
         },
         {
-            title: 'แจ้งซ่อม (Repair)',
+            title: 'แจ้งซ่อม',
             href: '/repairs',
             icon: Wrench,
         },
         {
-            title: 'ตะกร้าสินค้า (Cart)',
+            title: 'ตะกร้าสินค้า',
             href: '/cart',
             icon: ShoppingCart,
             badge: cartCount > 0 ? cartCount : undefined,
         },
         {
-            title: 'คำสั่งซื้อ (Orders)',
+            title: 'คำสั่งซื้อ',
             href: '/orders',
             icon: Package,
         },
@@ -82,7 +81,6 @@ export function AppSidebar() {
 
             <SidebarFooter>
                 <NavFooter items={footerNavItems} className="mt-auto" />
-                <NavUser />
             </SidebarFooter>
         </Sidebar>
     );

@@ -20,7 +20,9 @@ class ShopController extends Controller
         $categorySlug = $request->query('category');
         $sortBy = $request->query('sort', 'featured');
 
-        $query = Product::with('category');
+        $query = Product::with('category')
+            ->whereNotNull('image_url')
+            ->where('image_url', '!=', '');
 
         if ($search) {
             $query->where(function ($q) use ($search) {
@@ -49,7 +51,11 @@ class ShopController extends Controller
 
         $products = $query->paginate(12)->withQueryString();
 
-        $categories = Category::withCount('products')->get();
+        $categories = Category::withCount([
+            'products' => function ($q) {
+                $q->whereNotNull('image_url')->where('image_url', '!=', '');
+            },
+        ])->get();
 
         return Inertia::render('shop/index', [
             'products' => $products,
@@ -74,6 +80,8 @@ class ShopController extends Controller
 
         $relatedProducts = Product::where('category_id', $product->category_id)
             ->where('id', '!=', $product->id)
+            ->whereNotNull('image_url')
+            ->where('image_url', '!=', '')
             ->take(4)
             ->get();
 

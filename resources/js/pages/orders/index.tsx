@@ -67,11 +67,9 @@ export default function OrderIndex({ orders }: Props) {
                 </div>
 
                 {orders.data.length === 0 ? (
-                    <Card className="text-center py-16 px-6 border-border bg-card max-w-md mx-auto w-full">
+                    <Card className="text-center py-16 px-6 bg-card max-w-md mx-auto w-full">
                         <CardContent className="space-y-4">
-                            <div className="size-16 rounded-full bg-muted/60 flex items-center justify-center mx-auto text-muted-foreground">
-                                <ShoppingBag className="size-8" />
-                            </div>
+                            <ShoppingBag className="size-12 text-muted-foreground mx-auto" />
                             <h2 className="text-lg font-bold text-foreground">ยังไม่มีประวัติคำสั่งซื้อ</h2>
                             <p className="text-muted-foreground text-xs leading-relaxed max-w-xs mx-auto">
                                 คุณยังไม่มีรายการสั่งซื้อในระบบ เลือกดูสินค้าอุปกรณ์คอมพิวเตอร์และซอฟต์แวร์เพื่อเริ่มสั่งซื้อ
@@ -92,10 +90,10 @@ export default function OrderIndex({ orders }: Props) {
                             return (
                                 <Card
                                     key={order.id}
-                                    className="border-border bg-card hover:border-border/80 transition-all overflow-hidden"
+                                    className="bg-card hover:bg-secondary/60 transition-all overflow-hidden"
                                 >
                                     {/* Order Header */}
-                                    <div className="flex flex-wrap items-center justify-between gap-3 p-4 bg-muted/20 border-b border-border text-xs">
+                                    <div className="flex flex-wrap items-center justify-between gap-3 p-4 bg-secondary/40 text-xs">
                                         <div className="flex items-center gap-3">
                                             <span className="font-mono font-bold text-foreground text-sm">
                                                 #{order.order_number}
@@ -107,11 +105,11 @@ export default function OrderIndex({ orders }: Props) {
 
                                         <div className="flex items-center gap-2">
                                             <Badge
-                                                variant="outline"
+                                                variant="secondary"
                                                 className={
                                                     isPaid
-                                                        ? 'border-emerald-500/30 text-emerald-500 bg-emerald-500/10'
-                                                        : 'border-amber-500/30 text-amber-500 bg-amber-500/10'
+                                                        ? 'text-emerald-400 bg-emerald-500/15'
+                                                        : 'text-amber-400 bg-amber-500/15'
                                                 }
                                             >
                                                 {isPaid ? (
@@ -125,7 +123,7 @@ export default function OrderIndex({ orders }: Props) {
                                                 )}
                                             </Badge>
 
-                                            <Badge variant="outline" className="border-primary/30 text-primary bg-primary/10">
+                                            <Badge variant="secondary" className="text-primary bg-primary/15">
                                                 {order.status === 'pending'
                                                     ? 'รอดำเนินการ'
                                                     : order.status === 'processing'
@@ -156,13 +154,13 @@ export default function OrderIndex({ orders }: Props) {
                                             </div>
 
                                             {/* Total & Action */}
-                                            <div className="md:col-span-4 flex flex-col md:items-end justify-center pt-3 md:pt-0 border-t md:border-t-0 border-border">
+                                            <div className="md:col-span-4 flex flex-col md:items-end justify-center pt-3 md:pt-0">
                                                 <div className="text-[11px] text-muted-foreground">ยอดรวมทั้งสิ้น</div>
                                                 <div className="text-lg font-black text-primary mb-2">
                                                     {formatPrice(order.total_amount)}
                                                 </div>
 
-                                                <Button asChild size="sm" variant="outline" className="text-xs gap-1.5 w-full sm:w-auto">
+                                                <Button asChild size="sm" variant="secondary" className="text-xs gap-1.5 w-full sm:w-auto">
                                                     <Link href={`/orders/${order.order_number}`}>
                                                         ดูรายละเอียด <ArrowRight className="size-3.5" />
                                                     </Link>
@@ -170,12 +168,12 @@ export default function OrderIndex({ orders }: Props) {
                                             </div>
                                         </div>
 
-                                        <div className="flex flex-wrap items-center justify-between text-[11px] text-muted-foreground pt-2 border-t border-border">
+                                        <div className="flex flex-wrap items-center justify-between text-[11px] text-muted-foreground pt-2">
                                             <div className="flex items-center gap-1.5">
                                                 {isPromptPay ? (
                                                     <QrCode className="size-3.5 text-primary" />
                                                 ) : (
-                                                    <Banknote className="size-3.5 text-emerald-500" />
+                                                    <Banknote className="size-3.5 text-emerald-400" />
                                                 )}
                                                 <span>
                                                     วิธีชำระเงิน:{' '}
@@ -201,7 +199,7 @@ export default function OrderIndex({ orders }: Props) {
                                     <Button
                                         key={idx}
                                         asChild={Boolean(link.url)}
-                                        variant={link.active ? 'default' : 'outline'}
+                                        variant={link.active ? 'default' : 'secondary'}
                                         size="sm"
                                         disabled={!link.url}
                                         className="h-8 px-3 text-xs"
@@ -228,7 +226,7 @@ export default function OrderIndex({ orders }: Props) {
 OrderIndex.layout = {
     breadcrumbs: [
         {
-            title: 'คำสั่งซื้อของฉัน (Orders)',
+            title: 'คำสั่งซื้อ',
             href: '/orders',
         },
     ],

@@ -60,37 +60,37 @@ export default function RepairsIndex({ tickets, isAuthenticated, errors }: Props
         switch (status) {
             case 'pending':
                 return (
-                    <Badge variant="outline" className="border-amber-500/40 text-amber-500 bg-amber-500/10 gap-1">
+                    <Badge variant="secondary" className="text-amber-400 bg-amber-500/15 gap-1 font-medium">
                         <Clock className="size-3" /> รอดำเนินการ
                     </Badge>
                 );
             case 'inspecting':
                 return (
-                    <Badge variant="outline" className="border-cyan-500/40 text-cyan-500 bg-cyan-500/10 gap-1">
+                    <Badge variant="secondary" className="text-cyan-400 bg-cyan-500/15 gap-1 font-medium">
                         <Search className="size-3" /> กำลังตรวจสอบ
                     </Badge>
                 );
             case 'in_progress':
                 return (
-                    <Badge variant="outline" className="border-blue-500/40 text-blue-500 bg-blue-500/10 gap-1">
+                    <Badge variant="secondary" className="text-blue-400 bg-blue-500/15 gap-1 font-medium">
                         <Wrench className="size-3" /> กำลังซ่อม
                     </Badge>
                 );
             case 'waiting_parts':
                 return (
-                    <Badge variant="outline" className="border-purple-500/40 text-purple-500 bg-purple-500/10 gap-1">
+                    <Badge variant="secondary" className="text-purple-400 bg-purple-500/15 gap-1 font-medium">
                         <Clock className="size-3" /> รออะไหล่
                     </Badge>
                 );
             case 'completed':
                 return (
-                    <Badge variant="outline" className="border-emerald-500/40 text-emerald-500 bg-emerald-500/10 gap-1">
+                    <Badge variant="secondary" className="text-emerald-400 bg-emerald-500/15 gap-1 font-medium">
                         <CheckCircle2 className="size-3" /> ซ่อมเสร็จสิ้น
                     </Badge>
                 );
             case 'cancelled':
                 return (
-                    <Badge variant="destructive" className="gap-1">
+                    <Badge variant="destructive" className="gap-1 font-medium">
                         <AlertCircle className="size-3" /> ยกเลิก
                     </Badge>
                 );
@@ -102,14 +102,14 @@ export default function RepairsIndex({ tickets, isAuthenticated, errors }: Props
     const getDeviceIcon = (deviceType: string) => {
         switch (deviceType) {
             case 'desktop':
-                return <Monitor className="size-5 text-primary" />;
+                return <Monitor className="size-6 text-primary" />;
             case 'notebook':
             case 'macbook':
-                return <Laptop className="size-5 text-primary" />;
+                return <Laptop className="size-6 text-primary" />;
             case 'component':
-                return <Cpu className="size-5 text-primary" />;
+                return <Cpu className="size-6 text-primary" />;
             default:
-                return <Wrench className="size-5 text-primary" />;
+                return <Wrench className="size-6 text-primary" />;
         }
     };
 
@@ -119,18 +119,16 @@ export default function RepairsIndex({ tickets, isAuthenticated, errors }: Props
 
             <div className="flex flex-1 flex-col gap-6 p-4 md:p-6 max-w-6xl w-full mx-auto">
                 {/* Header Banner */}
-                <Card className="relative overflow-hidden border-border bg-gradient-to-br from-card via-card to-muted/40 p-6 md:p-10">
-                    <div className="absolute top-0 right-0 -mt-10 -mr-10 size-80 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none" />
-
+                <Card className="relative overflow-hidden bg-card p-6 md:p-10">
                     <div className="relative z-10 max-w-3xl">
-                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs font-semibold text-primary mb-3">
+                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/15 text-xs font-semibold text-primary mb-3">
                             <Sparkles className="size-3.5" /> ศูนย์บริการซ่อมมาตรฐาน อะไหล่แท้ 100%
                         </div>
 
                         <h1 className="text-2xl md:text-4xl font-black text-foreground tracking-tight leading-tight mb-3">
                             บริการแจ้งซ่อมคอมพิวเตอร์ <br />
-                            <span className="bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 bg-clip-text text-transparent">
-                                PC, Notebook, MacBook & อัปเกรด
+                            <span className="text-primary">
+                                PC, Notebook, MacBook และอัปเกรด
                             </span>
                         </h1>
 
@@ -139,7 +137,7 @@ export default function RepairsIndex({ tickets, isAuthenticated, errors }: Props
                         </p>
 
                         <div className="flex flex-wrap items-center gap-3">
-                            <Button asChild size="lg" className="font-bold gap-2 bg-primary text-primary-foreground shadow-md hover:bg-primary/90">
+                            <Button asChild size="lg" className="font-bold gap-2">
                                 <Link href="/repairs/create">
                                     <Plus className="size-4" /> แจ้งซ่อมอุปกรณ์ออนไลน์
                                 </Link>
@@ -149,14 +147,14 @@ export default function RepairsIndex({ tickets, isAuthenticated, errors }: Props
                 </Card>
 
                 {/* Tracking Search Card */}
-                <Card className="border-border bg-card">
+                <Card className="bg-card">
                     <CardHeader className="pb-3">
                         <CardTitle className="text-base font-bold text-foreground flex items-center gap-2">
                             <Search className="size-4 text-primary" />
-                            ติดตามสถานะงานซ่อม (Track Repair Ticket)
+                            ติดตามสถานะงานซ่อม
                         </CardTitle>
                         <CardDescription className="text-xs">
-                            กรอกรหัสใบแจ้งซ่อม เช่น <code className="bg-muted px-1.5 py-0.5 rounded text-foreground font-mono">REP-20260920-0001</code> เพื่อตรวจสอบความคืบหน้า
+                            กรอกรหัสใบแจ้งซ่อม เช่น <code className="bg-secondary px-1.5 py-0.5 rounded text-foreground font-mono">REP-20260920-0001</code> เพื่อตรวจสอบความคืบหน้า
                         </CardDescription>
                     </CardHeader>
                     <CardContent>
@@ -186,23 +184,19 @@ export default function RepairsIndex({ tickets, isAuthenticated, errors }: Props
 
                 {/* Service Quality Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-                    <Card className="border-border bg-card p-4">
-                        <CardContent className="p-2 space-y-2">
-                            <div className="size-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mx-auto">
-                                <ShieldCheck className="size-5" />
-                            </div>
-                            <h3 className="font-bold text-sm text-foreground">ตรวจเช็คฟรี & ประเมินราคาก่อน</h3>
+                    <Card className="bg-card p-6">
+                        <CardContent className="p-0 space-y-3">
+                            <ShieldCheck className="size-8 text-primary mx-auto" />
+                            <h3 className="font-bold text-sm text-foreground">ตรวจเช็คฟรีและประเมินราคาก่อน</h3>
                             <p className="text-xs text-muted-foreground leading-relaxed">
                                 แจ้งอาการและราคาชัดเจนก่อนลงมือซ่อม ไม่บวกเพิ่ม ไม่มีค่าใช้จ่ายแอบแฝง
                             </p>
                         </CardContent>
                     </Card>
 
-                    <Card className="border-border bg-card p-4">
-                        <CardContent className="p-2 space-y-2">
-                            <div className="size-10 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center mx-auto">
-                                <Cpu className="size-5" />
-                            </div>
+                    <Card className="bg-card p-6">
+                        <CardContent className="p-0 space-y-3">
+                            <Cpu className="size-8 text-primary mx-auto" />
                             <h3 className="font-bold text-sm text-foreground">อะไหล่แท้ ประกันงานซ่อม</h3>
                             <p className="text-xs text-muted-foreground leading-relaxed">
                                 ใช้อะไหล่คุณภาพศูนย์แท้ 100% พร้อมรับประกันงานซ่อมนานสูงสุดถึง 90 วัน
@@ -210,12 +204,10 @@ export default function RepairsIndex({ tickets, isAuthenticated, errors }: Props
                         </CardContent>
                     </Card>
 
-                    <Card className="border-border bg-card p-4">
-                        <CardContent className="p-2 space-y-2">
-                            <div className="size-10 rounded-xl bg-indigo-500/10 text-indigo-500 flex items-center justify-center mx-auto">
-                                <Truck className="size-5" />
-                            </div>
-                            <h3 className="font-bold text-sm text-foreground">บริการรับ-ส่งถึงที่</h3>
+                    <Card className="bg-card p-6">
+                        <CardContent className="p-0 space-y-3">
+                            <Truck className="size-8 text-primary mx-auto" />
+                            <h3 className="font-bold text-sm text-foreground">บริการรับส่งถึงที่</h3>
                             <p className="text-xs text-muted-foreground leading-relaxed">
                                 สะดวกสบายด้วยบริการนัดรับเครื่องถึงบ้าน หรือนำมาส่งที่หน้าร้านได้โดยตรง
                             </p>
@@ -237,11 +229,11 @@ export default function RepairsIndex({ tickets, isAuthenticated, errors }: Props
                             {tickets.data.map((ticket) => (
                                 <Card
                                     key={ticket.id}
-                                    className="border-border bg-card hover:border-border/80 transition-colors"
+                                    className="bg-card hover:bg-secondary/60 transition-colors"
                                 >
                                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 md:p-5">
                                         <div className="flex items-start gap-4">
-                                            <div className="size-12 rounded-xl bg-muted/60 border border-border flex items-center justify-center flex-shrink-0 mt-0.5">
+                                            <div className="flex items-center justify-center flex-shrink-0 mt-1">
                                                 {getDeviceIcon(ticket.device_type)}
                                             </div>
 
@@ -268,7 +260,7 @@ export default function RepairsIndex({ tickets, isAuthenticated, errors }: Props
                                             </div>
                                         </div>
 
-                                        <div className="flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto pt-2 sm:pt-0 border-t sm:border-t-0 border-border gap-2">
+                                        <div className="flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto pt-2 sm:pt-0 gap-2">
                                             <div className="text-right">
                                                 <span className="text-[11px] text-muted-foreground block">
                                                     วันที่แจ้ง: {formatDate(ticket.created_at)}
@@ -278,7 +270,7 @@ export default function RepairsIndex({ tickets, isAuthenticated, errors }: Props
                                                 </span>
                                             </div>
 
-                                            <Button asChild size="sm" variant="outline" className="gap-1 text-xs">
+                                            <Button asChild size="sm" variant="secondary" className="gap-1 text-xs">
                                                 <Link href={`/repairs/${ticket.ticket_number}`}>
                                                     ดูสถานะ <ArrowRight className="size-3.5" />
                                                 </Link>
@@ -298,7 +290,7 @@ export default function RepairsIndex({ tickets, isAuthenticated, errors }: Props
 RepairsIndex.layout = {
     breadcrumbs: [
         {
-            title: 'บริการแจ้งซ่อม (Repair Service)',
+            title: 'บริการแจ้งซ่อม',
             href: '/repairs',
         },
     ],

@@ -24,6 +24,7 @@ Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.in
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
 // Orders
+Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
 Route::get('/orders/{orderNumber}', [OrderController::class, 'show'])->name('orders.show');
 Route::post('/orders/{order}/confirm-payment', [OrderController::class, 'confirmPayment'])->name('orders.confirm-payment');
 
@@ -35,9 +36,9 @@ Route::post('/repairs/track', [RepairTicketController::class, 'track'])->name('r
 Route::get('/repairs/{ticketNumber}', [RepairTicketController::class, 'show'])->name('repairs.show');
 Route::post('/repairs/{ticket}/advance-status', [RepairTicketController::class, 'advanceStatus'])->name('repairs.advance-status');
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-    Route::inertia('dashboard', 'dashboard')->name('dashboard');
-});
+// Demo Fallbacks (No Auth)
+Route::get('/dashboard', fn () => redirect()->route('shop.index'))->name('dashboard');
+Route::get('/login', fn () => redirect()->route('shop.index'))->name('login');
+Route::get('/register', fn () => redirect()->route('shop.index'))->name('register');
 
 require __DIR__.'/settings.php';

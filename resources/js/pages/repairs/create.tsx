@@ -33,15 +33,15 @@ interface Props {
 }
 
 const COMMON_SYMPTOMS = [
-    'เปิดไม่ติด / ไฟไม่เข้า',
-    'เปิดติดแต่ไม่ขึ้นภาพ (จอดำ)',
-    'จอฟ้า (Blue Screen / BSOD)',
-    'เครื่องร้อนจัด / พัดลมหมุนเสียงดัง',
-    'ทำงานช้ามาก / ติดไวรัส-มัลแวร์',
-    'แบตเตอรี่เสื่อม / บวม / ชาร์จไม่เข้า',
-    'เปิดโปรแกรมแล้วค้าง / ดับเอง',
-    'ต้องการอัปเกรด (RAM / SSD / การ์ดจอ)',
-    'ลงระบบปฏิบัติการใหม่ (Windows / macOS)',
+    'เปิดไม่ติด หรือไฟไม่เข้า',
+    'เปิดติดแต่ไม่ขึ้นภาพ จอดำ',
+    'จอฟ้า Blue Screen',
+    'เครื่องร้อนจัด หรือพัดลมหมุนเสียงดัง',
+    'ทำงานช้ามาก หรือติดไวรัส',
+    'แบตเตอรี่เสื่อม บวม หรือชาร์จไม่เข้า',
+    'เปิดโปรแกรมแล้วค้าง หรือดับเอง',
+    'ต้องการอัปเกรด RAM, SSD หรือการ์ดจอ',
+    'ลงระบบปฏิบัติการใหม่ Windows หรือ macOS',
 ];
 
 export default function RepairCreate({ defaultValues }: Props) {
@@ -94,7 +94,7 @@ export default function RepairCreate({ defaultValues }: Props) {
                         </p>
                     </div>
 
-                    <Button asChild variant="outline" size="sm" className="gap-1.5">
+                    <Button asChild variant="secondary" size="sm" className="gap-1.5">
                         <Link href="/repairs">
                             <ArrowLeft className="size-3.5" /> ย้อนกลับ
                         </Link>
@@ -103,7 +103,7 @@ export default function RepairCreate({ defaultValues }: Props) {
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                     {/* 1. Device Information */}
-                    <Card className="border-border bg-card">
+                    <Card className="bg-card">
                         <CardHeader className="pb-3">
                             <CardTitle className="text-base font-bold text-foreground flex items-center gap-2">
                                 <span className="size-6 rounded-full bg-primary/20 text-primary text-xs flex items-center justify-center font-bold">
@@ -118,10 +118,10 @@ export default function RepairCreate({ defaultValues }: Props) {
                                 <Label className="text-xs">ประเภทอุปกรณ์ <span className="text-destructive">*</span></Label>
                                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                                     {[
-                                        { id: 'notebook', label: 'โน้ตบุ๊ก (Notebook)', icon: Laptop },
-                                        { id: 'desktop', label: 'คอมตั้งโต๊ะ (PC/Desktop)', icon: Monitor },
-                                        { id: 'macbook', label: 'MacBook / Mac', icon: Apple },
-                                        { id: 'component', label: 'ชิ้นส่วน / อะไหล่', icon: Cpu },
+                                        { id: 'notebook', label: 'โน้ตบุ๊ก', icon: Laptop },
+                                        { id: 'desktop', label: 'คอมพิวเตอร์ตั้งโต๊ะ', icon: Monitor },
+                                        { id: 'macbook', label: 'MacBook', icon: Apple },
+                                        { id: 'component', label: 'ชิ้นส่วนและอะไหล่', icon: Cpu },
                                     ].map((dev) => {
                                         const Icon = dev.icon;
                                         const isSelected = data.device_type === dev.id;
@@ -129,10 +129,10 @@ export default function RepairCreate({ defaultValues }: Props) {
                                             <div
                                                 key={dev.id}
                                                 onClick={() => setData('device_type', dev.id)}
-                                                className={`p-3 rounded-xl border-2 text-center cursor-pointer transition-all flex flex-col items-center gap-2 ${
+                                                className={`p-3 rounded-xl text-center cursor-pointer transition-all flex flex-col items-center gap-2 ${
                                                     isSelected
-                                                        ? 'border-primary bg-primary/10 text-primary font-bold'
-                                                        : 'border-border bg-card hover:border-muted-foreground/30 text-muted-foreground'
+                                                        ? 'bg-primary/20 text-primary font-bold'
+                                                        : 'bg-secondary/60 hover:bg-secondary text-muted-foreground'
                                                 }`}
                                             >
                                                 <Icon className="size-5" />
@@ -147,7 +147,7 @@ export default function RepairCreate({ defaultValues }: Props) {
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div className="space-y-1.5">
                                     <Label htmlFor="device_brand" className="text-xs">
-                                        แบรนด์ / ยี่ห้อ <span className="text-destructive">*</span>
+                                        ยี่ห้อ <span className="text-destructive">*</span>
                                     </Label>
                                     <Input
                                         id="device_brand"
@@ -162,7 +162,7 @@ export default function RepairCreate({ defaultValues }: Props) {
 
                                 <div className="space-y-1.5">
                                     <Label htmlFor="device_model" className="text-xs">
-                                        ชื่อรุ่น / สเปก <span className="text-destructive">*</span>
+                                        รุ่น <span className="text-destructive">*</span>
                                     </Label>
                                     <Input
                                         id="device_model"
@@ -178,7 +178,7 @@ export default function RepairCreate({ defaultValues }: Props) {
 
                             <div className="space-y-1.5">
                                 <Label htmlFor="serial_number" className="text-xs text-muted-foreground">
-                                    Serial Number / S/N (ถ้ามี)
+                                    หมายเลขเครื่อง Serial Number ถ้ามี
                                 </Label>
                                 <Input
                                     id="serial_number"
@@ -192,7 +192,7 @@ export default function RepairCreate({ defaultValues }: Props) {
                     </Card>
 
                     {/* 2. Problem Description & Symptoms */}
-                    <Card className="border-border bg-card">
+                    <Card className="bg-card">
                         <CardHeader className="pb-3">
                             <CardTitle className="text-base font-bold text-foreground flex items-center gap-2">
                                 <span className="size-6 rounded-full bg-primary/20 text-primary text-xs flex items-center justify-center font-bold">
@@ -205,7 +205,7 @@ export default function RepairCreate({ defaultValues }: Props) {
                             {/* Common Symptoms Pills */}
                             <div className="space-y-2">
                                 <Label className="text-xs text-muted-foreground">
-                                    เลือกอาการเสียที่ตรงกับปัญหา (เลือกได้หลายข้อ):
+                                    เลือกอาการเสียที่ตรงกับปัญหา โดยเลือกได้หลายข้อ:
                                 </Label>
                                 <div className="flex flex-wrap gap-2">
                                     {COMMON_SYMPTOMS.map((sym) => {
@@ -214,7 +214,7 @@ export default function RepairCreate({ defaultValues }: Props) {
                                             <Button
                                                 key={sym}
                                                 type="button"
-                                                variant={isSelected ? 'default' : 'outline'}
+                                                variant={isSelected ? 'default' : 'secondary'}
                                                 size="sm"
                                                 onClick={() => toggleSymptom(sym)}
                                                 className="text-xs h-8"
@@ -238,7 +238,7 @@ export default function RepairCreate({ defaultValues }: Props) {
                                     value={data.problem_description}
                                     onChange={(e) => setData('problem_description', e.target.value)}
                                     placeholder="ระบุอาการเสียอย่างละเอียด เช่น เกิดขึ้นเมื่อไหร่ มีเสียงเตือนไหม หรือก่อนหน้านี้ทำอะไรกับเครื่องมา"
-                                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                    className="w-full rounded-md bg-secondary px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
                                     required
                                 />
                                 <InputError message={errors.problem_description} />
@@ -251,21 +251,21 @@ export default function RepairCreate({ defaultValues }: Props) {
                                     <div className="grid grid-cols-2 gap-2">
                                         <div
                                             onClick={() => setData('urgency', 'normal')}
-                                            className={`p-3 rounded-lg border-2 cursor-pointer text-center transition-all ${
+                                            className={`p-3 rounded-lg cursor-pointer text-center transition-all ${
                                                 data.urgency === 'normal'
-                                                    ? 'border-primary bg-primary/10 text-primary font-bold'
-                                                    : 'border-border bg-card text-muted-foreground'
+                                                    ? 'bg-primary/20 text-primary font-bold'
+                                                    : 'bg-secondary/60 hover:bg-secondary text-muted-foreground'
                                             }`}
                                         >
                                             <Clock className="size-4 mx-auto mb-1" />
-                                            <span className="text-xs">งานปกติ (1-3 วัน)</span>
+                                            <span className="text-xs">งานปกติ 1-3 วัน</span>
                                         </div>
                                         <div
                                             onClick={() => setData('urgency', 'urgent')}
-                                            className={`p-3 rounded-lg border-2 cursor-pointer text-center transition-all ${
+                                            className={`p-3 rounded-lg cursor-pointer text-center transition-all ${
                                                 data.urgency === 'urgent'
-                                                    ? 'border-destructive bg-destructive/10 text-destructive font-bold'
-                                                    : 'border-border bg-card text-muted-foreground'
+                                                    ? 'bg-destructive/20 text-destructive font-bold'
+                                                    : 'bg-secondary/60 hover:bg-secondary text-muted-foreground'
                                             }`}
                                         >
                                             <AlertCircle className="size-4 mx-auto mb-1" />
@@ -279,10 +279,10 @@ export default function RepairCreate({ defaultValues }: Props) {
                                     <div className="grid grid-cols-2 gap-2">
                                         <div
                                             onClick={() => setData('service_type', 'drop_off')}
-                                            className={`p-3 rounded-lg border-2 cursor-pointer text-center transition-all ${
+                                            className={`p-3 rounded-lg cursor-pointer text-center transition-all ${
                                                 data.service_type === 'drop_off'
-                                                    ? 'border-primary bg-primary/10 text-primary font-bold'
-                                                    : 'border-border bg-card text-muted-foreground'
+                                                    ? 'bg-primary/20 text-primary font-bold'
+                                                    : 'bg-secondary/60 hover:bg-secondary text-muted-foreground'
                                             }`}
                                         >
                                             <Store className="size-4 mx-auto mb-1" />
@@ -290,14 +290,14 @@ export default function RepairCreate({ defaultValues }: Props) {
                                         </div>
                                         <div
                                             onClick={() => setData('service_type', 'pickup')}
-                                            className={`p-3 rounded-lg border-2 cursor-pointer text-center transition-all ${
+                                            className={`p-3 rounded-lg cursor-pointer text-center transition-all ${
                                                 data.service_type === 'pickup'
-                                                    ? 'border-primary bg-primary/10 text-primary font-bold'
-                                                    : 'border-border bg-card text-muted-foreground'
+                                                    ? 'bg-primary/20 text-primary font-bold'
+                                                    : 'bg-secondary/60 hover:bg-secondary text-muted-foreground'
                                             }`}
                                         >
                                             <Truck className="size-4 mx-auto mb-1" />
-                                            <span className="text-xs">นัดรับที่บ้าน/ที่ทำงาน</span>
+                                            <span className="text-xs">นัดรับที่บ้านหรือที่ทำงาน</span>
                                         </div>
                                     </div>
                                 </div>
@@ -306,7 +306,7 @@ export default function RepairCreate({ defaultValues }: Props) {
                     </Card>
 
                     {/* 3. Customer Contact Info */}
-                    <Card className="border-border bg-card">
+                    <Card className="bg-card">
                         <CardHeader className="pb-3">
                             <CardTitle className="text-base font-bold text-foreground flex items-center gap-2">
                                 <span className="size-6 rounded-full bg-primary/20 text-primary text-xs flex items-center justify-center font-bold">
@@ -374,7 +374,7 @@ export default function RepairCreate({ defaultValues }: Props) {
                                         value={data.customer_address}
                                         onChange={(e) => setData('customer_address', e.target.value)}
                                         placeholder="ระบุบ้านเลขที่, ซอย, ถนน, ตำบล, อำเภอ, จังหวัด"
-                                        className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                                        className="w-full rounded-md bg-secondary px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
                                         required
                                     />
                                     <InputError message={errors.customer_address} />
@@ -385,14 +385,14 @@ export default function RepairCreate({ defaultValues }: Props) {
 
                     {/* Submit Button */}
                     <div className="flex items-center justify-end gap-3 pt-2">
-                        <Button asChild variant="outline">
+                        <Button asChild variant="secondary">
                             <Link href="/repairs">ยกเลิก</Link>
                         </Button>
                         <Button
                             type="submit"
                             disabled={processing}
                             size="lg"
-                            className="font-bold px-8 bg-primary text-primary-foreground shadow-md hover:bg-primary/90"
+                            className="font-bold px-8"
                         >
                             {processing ? 'กำลังบันทึกข้อมูล...' : 'ยืนยันการส่งคำขอแจ้งซ่อม'}
                         </Button>

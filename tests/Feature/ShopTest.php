@@ -181,3 +181,15 @@ test('can checkout with cash on delivery (COD)', function () {
 
     $response->assertRedirect(route('orders.show', $order->order_number));
 });
+
+test('guest can view orders index without login in demo mode', function () {
+    $response = $this->get(route('orders.index'));
+
+    $response->assertOk();
+});
+
+test('auth routes redirect to shop index', function () {
+    $this->get('/login')->assertRedirect(route('shop.index'));
+    $this->get('/register')->assertRedirect(route('shop.index'));
+    $this->get('/dashboard')->assertRedirect(route('shop.index'));
+});

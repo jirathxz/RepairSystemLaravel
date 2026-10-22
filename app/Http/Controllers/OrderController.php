@@ -4,25 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class OrderController extends Controller
 {
     /**
-     * Display a listing of the user's orders.
+     * Display a listing of orders.
      */
-    public function index(Request $request): Response|RedirectResponse
+    public function index(): Response
     {
-        $user = $request->user();
-
-        if (! $user) {
-            return redirect()->route('login');
-        }
-
         $orders = Order::with(['items.product'])
-            ->where('user_id', $user->id)
             ->latest()
             ->paginate(10);
 

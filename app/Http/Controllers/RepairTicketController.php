@@ -13,20 +13,13 @@ class RepairTicketController extends Controller
     /**
      * Display a listing of repair tickets or tracking portal.
      */
-    public function index(Request $request): Response
+    public function index(): Response
     {
-        $user = $request->user();
-        $query = RepairTicket::query()->latest();
-
-        if ($user) {
-            $query->where('user_id', $user->id);
-        }
-
-        $tickets = $user ? $query->paginate(10)->withQueryString() : null;
+        $tickets = RepairTicket::query()->latest()->paginate(10)->withQueryString();
 
         return Inertia::render('repairs/index', [
             'tickets' => $tickets,
-            'isAuthenticated' => (bool) $user,
+            'isAuthenticated' => true,
         ]);
     }
 

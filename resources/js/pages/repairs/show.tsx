@@ -90,7 +90,7 @@ export default function RepairShow({ ticket }: Props) {
 
             <div className="flex flex-1 flex-col gap-6 p-4 md:p-6 max-w-5xl w-full mx-auto">
                 {/* Header Card */}
-                <Card className="border-border bg-gradient-to-br from-card via-card to-muted/40 p-6">
+                <Card className="bg-card p-6">
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                         <div className="space-y-1">
                             <div className="flex items-center gap-2">
@@ -123,7 +123,7 @@ export default function RepairShow({ ticket }: Props) {
                         </div>
 
                         <div className="flex items-center gap-2">
-                            <Button asChild variant="outline" size="sm" className="gap-1.5">
+                            <Button asChild variant="secondary" size="sm" className="gap-1.5">
                                 <Link href="/repairs">
                                     <ArrowLeft className="size-3.5" /> กลับหน้าแจ้งซ่อม
                                 </Link>
@@ -133,7 +133,7 @@ export default function RepairShow({ ticket }: Props) {
                 </Card>
 
                 {/* Status Stepper Card */}
-                <Card className="border-border bg-card">
+                <Card className="bg-card">
                     <CardHeader className="pb-3">
                         <CardTitle className="text-base font-bold text-foreground flex items-center justify-between">
                             <span className="flex items-center gap-2">
@@ -147,7 +147,7 @@ export default function RepairShow({ ticket }: Props) {
                     </CardHeader>
                     <CardContent className="space-y-6">
                         {isCancelled ? (
-                            <div className="p-4 rounded-xl bg-destructive/10 border border-destructive/20 text-center text-destructive">
+                            <div className="p-4 rounded-xl bg-destructive/15 text-center text-destructive">
                                 <AlertCircle className="size-8 mx-auto mb-2" />
                                 <h3 className="font-bold text-sm">การแจ้งซ่อมนี้ถูกยกเลิกแล้ว</h3>
                             </div>
@@ -160,12 +160,12 @@ export default function RepairShow({ ticket }: Props) {
                                     return (
                                         <div
                                             key={step.key}
-                                            className={`p-3 rounded-xl border text-center transition-all ${
+                                            className={`p-3 rounded-xl text-center transition-all ${
                                                 isCurrent
-                                                    ? 'border-primary bg-primary/10 shadow-sm'
+                                                    ? 'bg-primary/20 text-primary'
                                                     : isDone
-                                                      ? 'border-emerald-500/40 bg-emerald-500/5'
-                                                      : 'border-border bg-muted/20 opacity-60'
+                                                      ? 'bg-emerald-500/10'
+                                                      : 'bg-secondary/40 opacity-60'
                                             }`}
                                         >
                                             <div
@@ -174,7 +174,7 @@ export default function RepairShow({ ticket }: Props) {
                                                         ? 'bg-primary text-primary-foreground'
                                                         : isDone
                                                           ? 'bg-emerald-500 text-white'
-                                                          : 'bg-muted text-muted-foreground'
+                                                          : 'bg-secondary text-muted-foreground'
                                                 }`}
                                             >
                                                 {isDone ? <CheckCircle2 className="size-4" /> : idx + 1}
@@ -192,20 +192,20 @@ export default function RepairShow({ ticket }: Props) {
                         )}
 
                         {/* Interactive Demo Action Button */}
-                        <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 p-3 rounded-xl bg-muted/40 border border-border">
+                        <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 p-3 rounded-xl bg-secondary/50">
                             <div className="text-xs text-muted-foreground flex items-center gap-1.5">
                                 <Sparkles className="size-3.5 text-primary" />
-                                <span>ปุ่มทดสอบสำหรับอาจารย์/ผู้ตรวจ: ทดลองเลื่อนสถานะงานซ่อม</span>
+                                <span>ปุ่มทดสอบสำหรับอาจารย์และผู้ตรวจ: ทดลองเลื่อนสถานะงานซ่อม</span>
                             </div>
                             <Button
                                 onClick={handleAdvanceStatus}
                                 disabled={isAdvancing}
                                 size="sm"
-                                variant="secondary"
+                                variant="default"
                                 className="font-bold text-xs gap-1.5 w-full sm:w-auto"
                             >
                                 <Wrench className="size-3.5" />
-                                {isAdvancing ? 'กำลังอัปเดต...' : 'จำลองอัปเดตขั้นตอนถัดไป (Advance Demo)'}
+                                {isAdvancing ? 'กำลังอัปเดต...' : 'จำลองอัปเดตขั้นตอนถัดไป'}
                             </Button>
                         </div>
                     </CardContent>
@@ -216,7 +216,7 @@ export default function RepairShow({ ticket }: Props) {
                     {/* Left: Device & Problem Info */}
                     <div className="md:col-span-7 space-y-6">
                         {/* Device Info */}
-                        <Card className="border-border bg-card">
+                        <Card className="bg-card">
                             <CardHeader className="pb-3">
                                 <CardTitle className="text-sm font-bold text-foreground flex items-center gap-2">
                                     <Laptop className="size-4 text-primary" /> รายละเอียดเครื่องที่ส่งซ่อม
@@ -230,20 +230,20 @@ export default function RepairShow({ ticket }: Props) {
                                     </span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span className="text-muted-foreground">ยี่ห้อ / แบรนด์:</span>
+                                    <span className="text-muted-foreground">ยี่ห้อ:</span>
                                     <span className="font-bold text-foreground">
                                         {ticket.device_brand}
                                     </span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span className="text-muted-foreground">รุ่น / Model:</span>
+                                    <span className="text-muted-foreground">รุ่น:</span>
                                     <span className="font-bold text-foreground">
                                         {ticket.device_model}
                                     </span>
                                 </div>
                                 {ticket.serial_number && (
                                     <div className="flex justify-between">
-                                        <span className="text-muted-foreground">Serial Number:</span>
+                                        <span className="text-muted-foreground">หมายเลขเครื่อง:</span>
                                         <span className="font-mono font-medium text-foreground">
                                             {ticket.serial_number}
                                         </span>
@@ -254,15 +254,15 @@ export default function RepairShow({ ticket }: Props) {
                                     <span className="font-medium text-foreground">
                                         {ticket.service_type === 'drop_off'
                                             ? 'ส่งซ่อมที่หน้าร้าน'
-                                            : 'นัดรับที่บ้าน/ที่ทำงาน'}
+                                            : 'นัดรับที่บ้านหรือที่ทำงาน'}
                                     </span>
                                 </div>
 
-                                <Separator />
+                                <Separator className="bg-secondary" />
 
                                 <div>
                                     <span className="text-muted-foreground block mb-1">อาการเสียที่ระบุ:</span>
-                                    <p className="text-foreground leading-relaxed bg-muted/30 p-3 rounded-lg border border-border">
+                                    <p className="text-foreground leading-relaxed bg-secondary/40 p-3 rounded-lg">
                                         {ticket.problem_description}
                                     </p>
                                 </div>
@@ -272,7 +272,7 @@ export default function RepairShow({ ticket }: Props) {
                                         <span className="text-muted-foreground block mb-1.5">หมวดหมู่อาการ:</span>
                                         <div className="flex flex-wrap gap-1.5">
                                             {ticket.symptoms.map((sym, idx) => (
-                                                <Badge key={idx} variant="outline" className="text-[10px]">
+                                                <Badge key={idx} variant="secondary" className="text-[10px]">
                                                     {sym}
                                                 </Badge>
                                             ))}
@@ -286,16 +286,16 @@ export default function RepairShow({ ticket }: Props) {
                     {/* Right: Technician Notes & Cost & Customer Contact */}
                     <div className="md:col-span-5 space-y-6">
                         {/* Technician Notes & Cost */}
-                        <Card className="border-border bg-card">
+                        <Card className="bg-card">
                             <CardHeader className="pb-3">
                                 <CardTitle className="text-sm font-bold text-foreground flex items-center gap-2">
                                     <Wrench className="size-4 text-primary" /> ผลการตรวจเช็คและราคาประเมิน
                                 </CardTitle>
                             </CardHeader>
                             <CardContent className="space-y-4">
-                                <div className="p-4 rounded-xl bg-muted/30 border border-border space-y-1">
+                                <div className="p-4 rounded-xl bg-secondary/50 space-y-1">
                                     <span className="text-xs text-muted-foreground block">
-                                        ราคาประเมินงานซ่อม (รวมค่าแรงและอะไหล่)
+                                        ราคาประเมินงานซ่อมรวมค่าแรงและอะไหล่
                                     </span>
                                     <span className="text-2xl font-black text-primary">
                                         {ticket.estimated_cost
@@ -308,7 +308,7 @@ export default function RepairShow({ ticket }: Props) {
                                     <span className="font-semibold text-foreground block">
                                         บันทึกความเห็นจากช่างผู้เชี่ยวชาญ:
                                     </span>
-                                    <div className="p-3 rounded-lg bg-muted/20 border border-border text-foreground leading-relaxed">
+                                    <div className="p-3 rounded-lg bg-secondary/30 text-foreground leading-relaxed">
                                         {ticket.technician_notes || 'ช่างกำลังตรวจเช็คอาการและเตรียมแจ้งรายละเอียด'}
                                     </div>
                                 </div>
@@ -316,7 +316,7 @@ export default function RepairShow({ ticket }: Props) {
                         </Card>
 
                         {/* Customer Contact Card */}
-                        <Card className="border-border bg-card">
+                        <Card className="bg-card">
                             <CardHeader className="pb-3">
                                 <CardTitle className="text-sm font-bold text-foreground flex items-center gap-2">
                                     <Phone className="size-4 text-primary" /> ข้อมูลผู้ส่งซ่อม

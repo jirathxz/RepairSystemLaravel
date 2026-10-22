@@ -93,11 +93,11 @@ export default function CheckoutPage({
                         {/* Form Inputs (Left Column) */}
                         <div className="lg:col-span-7 space-y-6">
                             {/* 1. Customer Information */}
-                            <Card className="border-border bg-card">
+                            <Card className="bg-card">
                                 <CardHeader className="pb-3">
                                     <CardTitle className="text-base font-bold text-foreground flex items-center gap-2">
-                                        <span className="size-6 rounded-full bg-primary/20 text-primary text-xs flex items-center justify-center font-bold">
-                                            1
+                                        <span className="text-primary font-black text-base">
+                                            1.
                                         </span>
                                         ข้อมูลผู้สั่งซื้อและติดต่อ
                                     </CardTitle>
@@ -137,7 +137,7 @@ export default function CheckoutPage({
 
                                     <div className="space-y-1.5">
                                         <Label htmlFor="customer_email" className="text-xs">
-                                            อีเมล (สำหรับรับใบเสร็จและรหัสโปรแกรม) <span className="text-destructive">*</span>
+                                            อีเมลสำหรับรับใบเสร็จและรหัสโปรแกรม <span className="text-destructive">*</span>
                                         </Label>
                                         <Input
                                             id="customer_email"
@@ -153,11 +153,11 @@ export default function CheckoutPage({
                             </Card>
 
                             {/* 2. Shipping Address */}
-                            <Card className="border-border bg-card">
+                            <Card className="bg-card">
                                 <CardHeader className="pb-3">
                                     <CardTitle className="text-base font-bold text-foreground flex items-center gap-2">
-                                        <span className="size-6 rounded-full bg-primary/20 text-primary text-xs flex items-center justify-center font-bold">
-                                            2
+                                        <span className="text-primary font-black text-base">
+                                            2.
                                         </span>
                                         ที่อยู่จัดส่งสินค้า
                                     </CardTitle>
@@ -172,8 +172,8 @@ export default function CheckoutPage({
                                             rows={3}
                                             value={data.shipping_address}
                                             onChange={(e) => setData('shipping_address', e.target.value)}
-                                            placeholder="บ้านเลขที่, หมู่บ้าน/อาคาร, ถนน, ตำบล/แขวง, อำเภอ/เขต, จังหวัด, รหัสไปรษณีย์"
-                                            className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                            placeholder="บ้านเลขที่, หมู่บ้าน, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์"
+                                            className="w-full rounded-md bg-secondary px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
                                             required
                                         />
                                         <InputError message={errors.shipping_address} />
@@ -181,7 +181,7 @@ export default function CheckoutPage({
 
                                     <div className="space-y-1.5">
                                         <Label htmlFor="notes" className="text-xs text-muted-foreground">
-                                            หมายเหตุถึงผู้จัดส่ง (ถ้ามี)
+                                            หมายเหตุถึงผู้จัดส่งถ้ามี
                                         </Label>
                                         <Input
                                             id="notes"
@@ -195,11 +195,11 @@ export default function CheckoutPage({
                             </Card>
 
                             {/* 3. Payment Method */}
-                            <Card className="border-border bg-card">
+                            <Card className="bg-card">
                                 <CardHeader className="pb-3">
                                     <CardTitle className="text-base font-bold text-foreground flex items-center gap-2">
-                                        <span className="size-6 rounded-full bg-primary/20 text-primary text-xs flex items-center justify-center font-bold">
-                                            3
+                                        <span className="text-primary font-black text-base">
+                                            3.
                                         </span>
                                         เลือกช่องทางการชำระเงิน
                                     </CardTitle>
@@ -208,32 +208,20 @@ export default function CheckoutPage({
                                     {/* Option 1: PromptPay */}
                                     <div
                                         onClick={() => setData('payment_method', 'promptpay')}
-                                        className={`p-4 rounded-xl border-2 transition-all cursor-pointer flex items-start gap-4 ${
+                                        className={`p-4 rounded-xl transition-all cursor-pointer flex items-start gap-4 ${
                                             data.payment_method === 'promptpay'
-                                                ? 'border-primary bg-primary/5'
-                                                : 'border-border bg-card hover:border-muted-foreground/30'
+                                                ? 'bg-primary/20 text-primary'
+                                                : 'bg-secondary/60 hover:bg-secondary text-muted-foreground'
                                         }`}
                                     >
-                                        <div
-                                            className={`size-5 rounded-full border-2 flex items-center justify-center mt-0.5 flex-shrink-0 ${
-                                                data.payment_method === 'promptpay'
-                                                    ? 'border-primary'
-                                                    : 'border-muted-foreground'
-                                            }`}
-                                        >
-                                            {data.payment_method === 'promptpay' && (
-                                                <div className="size-2.5 rounded-full bg-primary" />
-                                            )}
-                                        </div>
-
                                         <div className="flex-1">
                                             <div className="flex items-center gap-2">
                                                 <QrCode className="size-5 text-primary" />
                                                 <span className="font-bold text-foreground text-sm">
-                                                    สแกนจ่ายผ่าน QR Code พร้อมเพย์ (PromptPay)
+                                                    สแกนจ่ายผ่าน QR Code พร้อมเพย์
                                                 </span>
-                                                <Badge variant="outline" className="text-[10px] text-primary border-primary/30">
-                                                    แนะนำ / ฟรีค่าธรรมเนียม
+                                                <Badge variant="secondary" className="text-[10px] text-primary">
+                                                    แนะนำ ฟรีค่าธรรมเนียม
                                                 </Badge>
                                             </div>
                                             <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
@@ -245,29 +233,17 @@ export default function CheckoutPage({
                                     {/* Option 2: Cash on Delivery */}
                                     <div
                                         onClick={() => setData('payment_method', 'cod')}
-                                        className={`p-4 rounded-xl border-2 transition-all cursor-pointer flex items-start gap-4 ${
+                                        className={`p-4 rounded-xl transition-all cursor-pointer flex items-start gap-4 ${
                                             data.payment_method === 'cod'
-                                                ? 'border-primary bg-primary/5'
-                                                : 'border-border bg-card hover:border-muted-foreground/30'
+                                                ? 'bg-primary/20 text-primary'
+                                                : 'bg-secondary/60 hover:bg-secondary text-muted-foreground'
                                         }`}
                                     >
-                                        <div
-                                            className={`size-5 rounded-full border-2 flex items-center justify-center mt-0.5 flex-shrink-0 ${
-                                                data.payment_method === 'cod'
-                                                    ? 'border-primary'
-                                                    : 'border-muted-foreground'
-                                            }`}
-                                        >
-                                            {data.payment_method === 'cod' && (
-                                                <div className="size-2.5 rounded-full bg-primary" />
-                                            )}
-                                        </div>
-
                                         <div className="flex-1">
                                             <div className="flex items-center gap-2">
-                                                <Banknote className="size-5 text-emerald-500" />
+                                                <Banknote className="size-5 text-emerald-400" />
                                                 <span className="font-bold text-foreground text-sm">
-                                                    เก็บเงินปลายทาง (Cash on Delivery)
+                                                    เก็บเงินปลายทาง
                                                 </span>
                                             </div>
                                             <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
@@ -283,7 +259,7 @@ export default function CheckoutPage({
 
                         {/* Order Summary & Submit (Right Column) */}
                         <div className="lg:col-span-5 space-y-4">
-                            <Card className="border-border bg-card">
+                            <Card className="bg-card">
                                 <CardHeader className="pb-3">
                                     <CardTitle className="text-base font-bold text-foreground flex items-center gap-2">
                                         <ShoppingBag className="size-4 text-primary" />
@@ -292,20 +268,22 @@ export default function CheckoutPage({
                                 </CardHeader>
                                 <CardContent className="space-y-4">
                                     {/* Item Preview list */}
-                                    <div className="space-y-3 max-h-72 overflow-y-auto pr-1">
+                                    <div className="space-y-2 max-h-72 overflow-y-auto pr-1">
                                         {items.map((item) => {
                                             const product = item.product;
                                             if (!product) return null;
                                             return (
                                                 <div
                                                     key={item.id}
-                                                    className="flex items-center gap-3 text-xs pb-2 border-b border-border/60 last:border-b-0"
+                                                    className="flex items-center gap-3 text-xs p-2 rounded-lg bg-secondary/50"
                                                 >
-                                                    <img
-                                                        src={product.image_url || ''}
-                                                        alt={product.name}
-                                                        className="size-12 rounded-lg object-cover bg-muted/40 border border-border flex-shrink-0"
-                                                    />
+                                                    <div className="size-12 rounded-lg bg-secondary/20 flex items-center justify-center p-1 flex-shrink-0 overflow-hidden">
+                                                        <img
+                                                            src={product.image_url || ''}
+                                                            alt={product.name}
+                                                            className="max-h-full max-w-full object-contain"
+                                                        />
+                                                    </div>
                                                     <div className="flex-1 min-w-0">
                                                         <div className="font-semibold text-foreground truncate">
                                                             {product.name}
@@ -322,7 +300,7 @@ export default function CheckoutPage({
                                         })}
                                     </div>
 
-                                    <Separator />
+                                    <Separator className="bg-secondary" />
 
                                     {/* Pricing breakdown */}
                                     <div className="space-y-2 text-xs">
@@ -334,13 +312,13 @@ export default function CheckoutPage({
                                             <span>ค่าจัดส่ง</span>
                                             <span className="font-semibold">
                                                 {shippingFee === 0 ? (
-                                                    <span className="text-emerald-500 font-bold">จัดส่งฟรี</span>
+                                                    <span className="text-emerald-400 font-bold">จัดส่งฟรี</span>
                                                 ) : (
                                                     formatPrice(shippingFee)
                                                 )}
                                             </span>
                                         </div>
-                                        <div className="flex justify-between items-baseline pt-2 border-t border-border">
+                                        <div className="flex justify-between items-baseline pt-2">
                                             <span className="text-sm font-bold text-foreground">ยอดชำระสุทธิ</span>
                                             <span className="text-2xl font-black text-primary">
                                                 {formatPrice(total)}
@@ -352,18 +330,18 @@ export default function CheckoutPage({
                                     <Button
                                         type="submit"
                                         disabled={processing || items.length === 0}
-                                        className="w-full h-12 font-bold text-sm bg-primary text-primary-foreground shadow-md hover:bg-primary/90 mt-2 gap-2"
+                                        className="w-full h-12 font-bold text-sm bg-primary text-primary-foreground hover:bg-primary/90 mt-2 gap-2"
                                     >
                                         <CheckCircle2 className="size-5" />
                                         {processing
                                             ? 'กำลังประมวลผลคำสั่งซื้อ...'
-                                            : `ยืนยันคำสั่งซื้อ (${formatPrice(total)})`}
+                                            : `ยืนยันคำสั่งซื้อ ${formatPrice(total)}`}
                                     </Button>
 
                                     {/* Security Guarantee */}
-                                    <div className="p-3 rounded-lg bg-muted/30 border border-border space-y-1.5 text-center">
+                                    <div className="p-3 rounded-lg bg-secondary/40 space-y-1.5 text-center">
                                         <div className="flex items-center justify-center gap-1.5 text-xs font-semibold text-foreground">
-                                            <ShieldCheck className="size-4 text-emerald-500" />
+                                            <ShieldCheck className="size-4 text-emerald-400" />
                                             การสั่งซื้อปลอดภัย มั่นใจได้ 100%
                                         </div>
                                         <p className="text-[11px] text-muted-foreground">
@@ -383,15 +361,15 @@ export default function CheckoutPage({
 CheckoutPage.layout = {
     breadcrumbs: [
         {
-            title: 'ร้านค้า (Shop)',
+            title: 'ร้านค้า',
             href: '/shop',
         },
         {
-            title: 'ตะกร้าสินค้า (Cart)',
+            title: 'ตะกร้าสินค้า',
             href: '/cart',
         },
         {
-            title: 'ชำระเงิน (Checkout)',
+            title: 'ชำระเงิน',
             href: '/checkout',
         },
     ],
